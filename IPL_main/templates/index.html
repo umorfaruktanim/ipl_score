@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IPL Score Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #007BFF;
+      color: white;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>IPL Score Predictor</h1>
+  <div class="form-container">
+    <form method="POST" action="/predict">
+      <label for="venue">Venue:</label>
+      <select name="venue" id="venue">
+        {% for item in venues %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="bat_team">Batting Team:</label>
+      <select name="bat_team" id="bat_team">
+        {% for item in batting_teams %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="bowl_team">Bowling Team:</label>
+      <select name="bowl_team" id="bowl_team">
+        {% for item in bowling_teams %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="batsman">Striker:</label>
+      <select name="batsman" id="batsman">
+        {% for item in batsmen %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="bowler">Bowler:</label>
+      <select name="bowler" id="bowler">
+        {% for item in bowlers %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit">Predict Score</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+      Predicted Score: <span>{{ prediction }}</span>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
